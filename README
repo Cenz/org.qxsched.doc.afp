@@ -1,0 +1,37 @@
+QXSched IBM AFP data stream library
+
+Main developer: VIncenzo Zocca
+Last update:    Tue Oct 25 22:24:03 CEST 2011
+
+Introduction
+In the past years I have witnessed many cases whereby highly complex
+software was used for relatively simple operations on IBM AFP data stream
+files. Although the implementation of an IBM AFP library in theory is
+straight forward, no such thing is currently available and is being
+actively developed.
+
+This library provides a framework for parsing and generating IBM AFP data
+stream files. It's current state is "good enough for simple operations".
+
+The library can dump AFP records as text files. Already implemented records
+have are clearly described. Not yet implemented records are simple byte
+dumps.
+Also supported is a dump of MD5 sums of records which allows the comparison
+of AFP data streams.
+
+A record grouper allows grouping of AFP records.
+
+Main design features:
+- Support for generic AFP classes for not yet implemented AFP data structures.
+- Support for specific AFP classes.
+- Support for dumping to text file.
+- Support for dumping of MD5 sums of IBM structures to text file.
+
+Contributions
+Should you decide to contribute then please note the following:
+- This is a GPL project. If you contribute you should also license your
+  work as such. See the COPYING file.
+Code style:
+- Let Eclipse always format your code.
+- Sort the members using the Eclipse standard feature.
+- Avoid letting attributes depend on the order they are declared.
