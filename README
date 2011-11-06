@@ -1,7 +1,7 @@
 QXSched IBM AFP data stream library
 
-Main developer: VIncenzo Zocca
-Last update:    Tue Oct 25 22:24:03 CEST 2011
+Main developer: Vincenzo Zocca [Vincenzo (at) Zocca (dot) com]
+Last update:    Sun Nov  6 08:12:37 CET 2011
 
 Introduction
 In the past years I have witnessed many cases whereby highly complex
@@ -35,3 +35,24 @@ Code style:
 - Let Eclipse always format your code.
 - Sort the members using the Eclipse standard feature.
 - Avoid letting attributes depend on the order they are declared.
+
+
+LICENSE INFO
+Copyright 2009, 2010, 2011 Vincenzo Zocca
+
+This file is part of Java library org.qxsched.doc.afp.
+
+Java library org.qxsched.doc.afp is free software: you can redistribute
+it and/or modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+Java library org.qxsched.doc.afp is distributed in the hope that it will
+be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Java library org.qxsched.doc.afp.
+If not, see <http://www.gnu.org/licenses/>.
+ 
