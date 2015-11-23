@@ -83,6 +83,16 @@ public abstract class AfpFactory {
 		} catch (IOException e) {
 			throw new AfpException("Failed to load properties resource "
 					+ resName, e);
+		} finally {
+			if (is != null) {
+				try {
+					is.close();
+					is = null;
+				} catch (IOException e) {
+					throw new AfpException("Failed to load properties resource "
+							+ resName, e);
+				}
+			}
 		}
 
 		// Get property

@@ -112,6 +112,15 @@ public class AfpStructuredFieldDefinitions {
 			props.load(is);
 		} catch (IOException e) {
 			throw new AfpException(e.getMessage(), e);
+		} finally {
+			if (is != null) {
+				try {
+					is.close();
+					is = null;
+				} catch (IOException e) {
+					throw new AfpException(e.getMessage(), e);
+				}
+			}
 		}
 
 		// Fill maps
