@@ -20,7 +20,7 @@ import org.qxsched.doc.afp.AfpTriplet;
 
 /*
  * 
- * Copyright 2009, 2010, 2011 Vincenzo Zocca
+ * Copyright 2009, 2010, 2011, 2015 Vincenzo Zocca
  * 
  * This file is part of Java library org.qxsched.doc.afp.
  *
@@ -68,8 +68,7 @@ public class AfpRecordTLETest extends TestCase {
 
 			// Open input stream
 			LOG.info("Open for readiong: " + TLE_SAMPLE.getPath());
-			InputStream in = new BufferedInputStream(new FileInputStream(
-					TLE_SAMPLE));
+			InputStream in = new BufferedInputStream(new FileInputStream(TLE_SAMPLE));
 			fact.setInputStream(in);
 
 			// Read record
@@ -121,8 +120,7 @@ public class AfpRecordTLETest extends TestCase {
 
 			// Open input stream
 			LOG.info("Open for readiong: " + TLE_SAMPLE.getPath());
-			InputStream in = new BufferedInputStream(new FileInputStream(
-					TLE_SAMPLE));
+			InputStream in = new BufferedInputStream(new FileInputStream(TLE_SAMPLE));
 			fact.setInputStream(in);
 
 			// Read record
@@ -142,7 +140,7 @@ public class AfpRecordTLETest extends TestCase {
 			// Copy triples
 			AfpTriplet[] trips = afpRecordTLE.getAfpTriplets();
 			AfpTriplet02 t02New = null;
-			AfpTriplet36 t36New = null;
+			// AfpTriplet36 t36New = null;
 			for (int i = 0; i < trips.length; i++) {
 
 				// Triplet
@@ -167,7 +165,7 @@ public class AfpRecordTLETest extends TestCase {
 				if (trip instanceof AfpTriplet36) {
 
 					// Cast
-					AfpTriplet36 t36Orig = (AfpTriplet36) trip;
+					// AfpTriplet36 t36Orig = (AfpTriplet36) trip;
 
 					// t36Orig.get
 				}

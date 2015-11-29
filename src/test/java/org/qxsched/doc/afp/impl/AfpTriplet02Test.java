@@ -18,7 +18,7 @@ import org.qxsched.doc.afp.util.AfpDump;
 
 /*
  * 
- * Copyright 2009, 2010, 2011 Vincenzo Zocca
+ * Copyright 2009, 2010, 2011, 2015 Vincenzo Zocca
  * 
  * This file is part of Java library org.qxsched.doc.afp.
  *
@@ -66,8 +66,7 @@ public class AfpTriplet02Test extends TestCase {
 
 			// Open input stream
 			LOG.info("Open for readiong: " + TLE_SAMPLE.getPath());
-			InputStream in = new BufferedInputStream(new FileInputStream(
-					TLE_SAMPLE));
+			InputStream in = new BufferedInputStream(new FileInputStream(TLE_SAMPLE));
 			fact.setInputStream(in);
 
 			// Read record
