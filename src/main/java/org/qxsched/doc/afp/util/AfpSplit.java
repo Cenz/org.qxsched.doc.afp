@@ -17,7 +17,7 @@ import org.qxsched.doc.afp.AfpRecord;
 
 /*
  * 
- * Copyright 2009, 2010, 2011 Vincenzo Zocca
+ * Copyright 2009, 2010, 2011, 2015 Vincenzo Zocca
  * 
  * This file is part of Java library org.qxsched.doc.afp.
  *
@@ -47,6 +47,7 @@ import org.qxsched.doc.afp.AfpRecord;
  */
 public class AfpSplit {
 
+	@SuppressWarnings("unused")
 	private static Logger LOG = Logger.getLogger(AfpSplit.class);
 
 	private static final NumberFormat MY_DEC_FORMAT_8 = new DecimalFormat();
