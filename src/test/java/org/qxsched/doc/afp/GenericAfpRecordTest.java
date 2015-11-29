@@ -6,9 +6,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.PushbackInputStream;
 
 import junit.framework.TestCase;
 
@@ -19,7 +19,7 @@ import org.qxsched.doc.afp.GenericAfpRecord;
 
 /*
  * 
- * Copyright 2009, 2010, 2011 Vincenzo Zocca
+ * Copyright 2009, 2010, 2011, 2015 Vincenzo Zocca
  * 
  * This file is part of Java library org.qxsched.doc.afp.
  *
@@ -47,6 +47,7 @@ import org.qxsched.doc.afp.GenericAfpRecord;
  */
 public class GenericAfpRecordTest extends TestCase {
 
+	@SuppressWarnings("unused")
 	private static Logger LOG = Logger.getLogger(GenericAfpRecordTest.class);
 
 	private static File sample1In = new File("target/test-classes/sample1.afp");
@@ -61,8 +62,7 @@ public class GenericAfpRecordTest extends TestCase {
 			AfpReadWriteProperties props = AfpReadWriteProperties.instance();
 
 			// Open sample input file for reading
-			InputStream in = new BufferedInputStream(new FileInputStream(
-					sample1In));
+			PushbackInputStream in = new PushbackInputStream(new BufferedInputStream(new FileInputStream(sample1In)));
 
 			// Open sample output file for writing AFP
 			OutputStream out = new BufferedOutputStream(new FileOutputStream(

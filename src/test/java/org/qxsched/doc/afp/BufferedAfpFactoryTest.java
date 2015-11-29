@@ -4,7 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.PushbackInputStream;
 
 import org.apache.log4j.Logger;
 
@@ -18,14 +18,14 @@ public class BufferedAfpFactoryTest extends TestCase {
 
 	public void test1() {
 
-		InputStream in = null;
+		PushbackInputStream in = null;
 		try {
 
 			AfpReadWriteProperties arwprops = new AfpReadWriteProperties();
 			arwprops.setConvertSpecificNone();
 
 			AfpFactory fact = AfpFactory.createAfpFactory();
-			in = new BufferedInputStream(new FileInputStream(sample1In));
+			in = new PushbackInputStream(new BufferedInputStream(new FileInputStream(sample1In)));
 			fact.setAfpReadWriteProperties(arwprops);
 			fact.setInputStream(in);
 			BufferedAfpFactory buffact = new BufferedAfpFactory(fact, 2);
