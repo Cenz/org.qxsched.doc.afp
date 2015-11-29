@@ -6,7 +6,7 @@ import java.io.OutputStream;
 
 /*
  * 
- * Copyright 2009, 2010, 2011 Vincenzo Zocca
+ * Copyright 2009, 2010, 2011, 2015 Vincenzo Zocca
  * 
  * This file is part of Java library org.qxsched.doc.afp.
  *
@@ -93,49 +93,13 @@ public interface AfpRecord {
 	 */
 	public String getSFIdentifierString();
 
-	// /**
-	// * Sets the record data.
-	// *
-	// * @param data
-	// * the byte array containing the record data.
-	// * @throws AfpException
-	// * if operation is not allowed.
-	// */
-	// public void setData(byte[] data) throws AfpException;
-
-	// /**
-	// * Sets the 1 byte flags field from the structured field introducer.
-	// *
-	// * @param flags
-	// * the 1 byte flags field from the structured field introducer.
-	// * @throws AfpException
-	// * if operation is not allowed.
-	// */
-	// public void setFlags(int flags) throws AfpException;
-
-	// /**
-	// * Sets the 2 byte reserved field from the structured field introducer.
-	// *
-	// * @param reserved
-	// * the 2 byte reserved field from the structured field
-	// * introducer.
-	// * @throws AfpException
-	// * if operation is not allowed.
-	// */
-	// public void setReserved(int reserved) throws AfpException;
-
-	// /**
-	// * Sets the 3 bytes structured field identifier field from the structured
-	// * field introducer.
-	// *
-	// * @param identifier
-	// * the 3 bytes structured field identifier field the structured
-	// * field identifier from the structured field introducer.
-	// * @throws AfpException
-	// * if operation is not allowed.
-	// */
-	// public void setSFIdentifier(int identifier) throws AfpException;
-
+	/**
+	 * Returns the flag to denote that the record is ended with CR LF.
+	 * 
+	 * @return the flag to denote that the record is ended with CR LF.
+	 */
+	public boolean isEndsInCrLf();
+	
 	/**
 	 * Writes the {@link AfpRecord} in a human readable form to the supplied
 	 * buffered writer. Intended for analysis.
