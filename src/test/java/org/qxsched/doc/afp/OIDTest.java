@@ -10,7 +10,7 @@ import org.qxsched.doc.afp.util.AfpDump;
 
 /*
  * 
- * Copyright 2009, 2010, 2011 Vincenzo Zocca
+ * Copyright 2009, 2010, 2011, 2015 Vincenzo Zocca
  * 
  * This file is part of Java library org.qxsched.doc.afp.
  *
@@ -39,7 +39,7 @@ public class OIDTest extends TestCase {
 
 	private static Logger LOG = Logger.getLogger(OIDTest.class);
 
-	private static final String OID_STR_1 = "{1.1.1.200}";
+	// private static final String OID_STR_1 = "{1.1.1.200}";
 	private static final String OID_STR_2 = "{1.3.18.0.4.1.1.14}";
 	private static final byte[] OID_UNENC = { 0x06, 0x07, 0x2B, 0x12, 0x00,
 			0x04, 0x01, 0x01, 0x0E };
