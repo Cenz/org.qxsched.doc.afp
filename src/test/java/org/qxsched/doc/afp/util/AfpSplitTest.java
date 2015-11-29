@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 
 /*
  * 
- * Copyright 2009, 2010, 2011 Vincenzo Zocca
+ * Copyright 2009, 2010, 2011, 2015 Vincenzo Zocca
  * 
  * This file is part of Java library org.qxsched.doc.afp.
  *
@@ -35,6 +35,7 @@ import org.apache.log4j.Logger;
  */
 public class AfpSplitTest extends TestCase {
 
+	@SuppressWarnings("unused")
 	private static Logger LOG = Logger.getLogger(AfpSplitTest.class);
 
 	private static File sample1In = new File("target/test-classes/sample1.afp");
