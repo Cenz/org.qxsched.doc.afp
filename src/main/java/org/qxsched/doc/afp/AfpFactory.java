@@ -11,7 +11,7 @@ import com.ibm.icu.charset.CharsetICU;
 
 /*
  * 
- * Copyright 2009, 2010, 2011 Vincenzo Zocca
+ * Copyright 2009, 2010, 2011, 2015 Vincenzo Zocca
  * 
  * This file is part of Java library org.qxsched.doc.afp.
  *
@@ -154,6 +154,9 @@ public abstract class AfpFactory {
 
 	/**
 	 * Returns the object's input stream.
+	 * 
+	 * NOTE: This may be an input stream derived from the one provided through
+	 * {@link #setInputStream(InputStream)}.
 	 * 
 	 * @return the object's input stream.
 	 */
