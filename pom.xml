@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.qxsched</groupId>
 	<artifactId>org.qxsched.doc.afp</artifactId>
-	<version>0.0.3</version>
+	<version>0.1.0</version>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -68,7 +68,7 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>jargs</groupId>
+			<groupId>net.sf</groupId>
 			<artifactId>jargs</artifactId>
 			<version>1.0</version>
 		</dependency>
