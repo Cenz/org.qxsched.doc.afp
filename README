@@ -4,11 +4,17 @@ Main developer: Vincenzo Zocca [Vincenzo (at) Zocca (dot) com]
 Last update:    Sun Nov  6 08:12:37 CET 2011
 
 Introduction
-In the past years I have witnessed many cases whereby highly complex
-software was used for relatively simple operations on IBM AFP data stream
-files. Although the implementation of an IBM AFP library in theory is
-straight forward, no such thing is currently available and is being
-actively developed.
+Looking for a simple API to read and write AFP files? E.g. to inject NOP
+records? Then consider this project.
+
+This software has already been used to process hundreds of millions of
+pages.
+
+I have witnessed many cases whereby highly complex software was used
+for relatively simple operations on IBM AFP data stream files. Although
+the implementation of an IBM AFP library in theory is straight forward,
+no such thing is currently was available or was actively maintained when
+this project started.
 
 This library provides a framework for parsing and generating IBM AFP data
 stream files. It's current state is "good enough for simple operations".
@@ -38,7 +44,7 @@ Code style:
 
 
 LICENSE INFO
-Copyright 2009, 2010, 2011 Vincenzo Zocca
+Copyright 2009, 2010, 2011, 2015 Vincenzo Zocca
 
 This file is part of Java library org.qxsched.doc.afp.
 
