@@ -4,8 +4,8 @@ import java.io.BufferedWriter;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PushbackInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -14,7 +14,7 @@ import org.qxsched.doc.afp.util.AfpDump;
 
 /*
  * 
- * Copyright 2009, 2010, 2011 Vincenzo Zocca
+ * Copyright 2009, 2010, 2011, 2015 Vincenzo Zocca
  * 
  * This file is part of Java library org.qxsched.doc.afp.
  *
@@ -44,6 +44,8 @@ public class GenericAfpRecord implements AfpRecord {
 
 	private static AfpStructuredFieldDefinitions afpDefs;
 	protected static int ccc = 0x5a;
+	protected static int cr = 0x0d;
+	protected static int lf = 0x0a;
 
 	private static Logger LOG = Logger.getLogger(GenericAfpRecord.class);
 	private static int maxDataLength = 0xffff - 8;
@@ -52,6 +54,7 @@ public class GenericAfpRecord implements AfpRecord {
 	private static int maxReserved = 0xffff;
 
 	private byte[] data;
+	private boolean endsInCrLf;
 	private int flags;
 	private int identifier;
 	private String identifierAbbrev;
@@ -61,7 +64,7 @@ public class GenericAfpRecord implements AfpRecord {
 	protected GenericAfpRecord() throws AfpException {
 	}
 
-	public GenericAfpRecord(InputStream in) throws AfpException {
+	public GenericAfpRecord(PushbackInputStream in) throws AfpException {
 
 		// Initialize
 		init();
@@ -157,9 +160,42 @@ public class GenericAfpRecord implements AfpRecord {
 					+ AfpStructuredFieldDefinitions.hexString(data.length, 4));
 		}
 
+		// Allow trailing CR LF
+		int trailing;
+		try {
+			
+			trailing = in.read();
+			
+			// EOF
+			if (trailing == -1) {
+				return;
+			}
+			
+			// New record
+			if (trailing == ccc) {
+				in.unread(trailing);
+				return;
+			}
+		} catch (IOException e) {
+			throw new AfpException("Failed to read from input stream", e);
+		}
+		if (trailing != cr) {
+			throw new AfpException("Expected CR but got " + AfpStructuredFieldDefinitions.hexString(trailing, 2));
+		}
+		
+		try {
+			trailing = in.read();
+		} catch (IOException e) {
+			throw new AfpException("Failed to read from input stream", e);
+		}
+		if (trailing != lf) {
+			throw new AfpException("Expected LF but got " + AfpStructuredFieldDefinitions.hexString(trailing, 2));
+		}
+		
+		endsInCrLf = true;
 	}
 
-	public GenericAfpRecord(InputStream in, AfpReadWriteProperties props)
+	public GenericAfpRecord(PushbackInputStream in, AfpReadWriteProperties props)
 			throws AfpException, IOException {
 	}
 
@@ -202,6 +238,10 @@ public class GenericAfpRecord implements AfpRecord {
 	public String getSFIdentifierString() {
 		return AfpStructuredFieldDefinitions.hexString(identifier, 6);
 	}
+	
+	public boolean isEndsInCrLf() {
+		return endsInCrLf;
+	}
 
 	private synchronized void init() throws AfpException {
 
@@ -224,6 +264,16 @@ public class GenericAfpRecord implements AfpRecord {
 		}
 		this.data = data;
 		length = this.data.length + 8;
+	}
+
+	/**
+	 * Sets the flag to denote that the record is ended with CR LF.
+	 * 
+	 * @param endsInCrLf
+	 *            the flag to denote that the record is ended with CR LF.
+	 */
+	public void setEndsInCrLf(boolean endsInCrLf) {
+		this.endsInCrLf = endsInCrLf;
 	}
 
 	protected void setFlags(int flags) throws AfpException {
@@ -347,6 +397,12 @@ public class GenericAfpRecord implements AfpRecord {
 
 		// Write data
 		out.write(getData());
+		
+		// Write CR LF
+		if (endsInCrLf) {
+			out.write(cr);
+			out.write(lf);
+		}
 	}
 
 	private boolean mustWriteMD5(AfpReadWriteProperties props) {
