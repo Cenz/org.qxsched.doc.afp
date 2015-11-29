@@ -40,6 +40,7 @@ public class AfpRecordGroup implements AfpRecord {
 	private AfpRecord afpEndGroup;
 	private AfpStructuredFieldDefinitions afpStructuredFieldDefinitions;
 	private boolean closed = false;
+	private boolean endsInCrLf;
 	private List<AfpRecord> memberList = new ArrayList<AfpRecord>();
 	private AfpRecordGroup parent;
 
@@ -128,11 +129,25 @@ public class AfpRecordGroup implements AfpRecord {
 		return afpBeginGroup.getSFIdentifierString();
 	}
 
+	public boolean isEndsInCrLf() {
+		return endsInCrLf;
+	}
+
 	public void setData(byte[] data) throws AfpException {
 		throw new AfpException("Method not supported in class "
 				+ AfpRecordGroup.class.getName());
 	}
 
+	/**
+	 * Sets the flag to denote that the record is ended with CR LF.
+	 * 
+	 * @param endsInCrLf
+	 *            the flag to denote that the record is ended with CR LF.
+	 */
+	public void setEndsInCrLf(boolean endsInCrLf) {
+		this.endsInCrLf = endsInCrLf;
+	}
+	
 	public void setFlags(int flags) throws AfpException {
 		throw new AfpException("Method not supported in class "
 				+ AfpRecordGroup.class.getName());
@@ -194,5 +209,4 @@ public class AfpRecordGroup implements AfpRecord {
 	public void writeData(BufferedWriter out, AfpReadWriteProperties props,
 			String prefix) throws IOException, AfpException {
 	}
-
 }
