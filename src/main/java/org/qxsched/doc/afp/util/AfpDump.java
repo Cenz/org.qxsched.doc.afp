@@ -28,7 +28,7 @@ import org.qxsched.doc.afp.util.AfpDump.Options.OptionsException;
 
 /*
  * 
- * Copyright 2009, 2010, 2011 Vincenzo Zocca
+ * Copyright 2009, 2010, 2011, 2015 Vincenzo Zocca
  * 
  * This file is part of Java library org.qxsched.doc.afp.
  *
@@ -272,8 +272,15 @@ public class AfpDump {
 			// Option -c
 			String valS = (String) cmdLineParser
 					.getOptionValue(convert_specific_opt);
-			if (valS != null) {
+			if (valS == null) {
+				valS = OPT_CONVERT_SPECIFIC_VAL_DEF;
+			} else {
+				if (valS.matches("^\\s*$")) {
+					valS = null;
+				}
+			}
 
+			if (valS != null) {
 				// Instantiate convert specific
 				convert_specific = new HashMap<Integer, Object>();
 
@@ -325,6 +332,11 @@ public class AfpDump {
 
 			// Option --md-thold
 			md_thold = (Integer) cmdLineParser.getOptionValue(md_thold_opt);
+			if (md_thold == null) {
+				md_thold = OPT_MD_THOLD_VAL_DEF;
+			} else if (md_thold.intValue() < 0) {
+				md_thold = null;
+			}
 
 			// Option -o
 			out_file = (String) cmdLineParser.getOptionValue(out_file_opt);
@@ -355,6 +367,7 @@ public class AfpDump {
 
 	private static final Character OPT_CONVERT_SPECIFIC_CHR = new Character('c');
 	private static final String OPT_CONVERT_SPECIFIC_STR = "convert-specific";
+	private static final String OPT_CONVERT_SPECIFIC_VAL_DEF = "nop";
 
 	private static final Character OPT_GROUP_RECORDS_CHR = new Character('g');
 	private static final String OPT_GROUP_RECORDS_STR = "group-records";
@@ -364,6 +377,7 @@ public class AfpDump {
 
 	private static final Character OPT_MD_THOLD_CHR = null;
 	private static final String OPT_MD_THOLD_STR = "md-thold";
+	private static final int OPT_MD_THOLD_VAL_DEF = 0;
 
 	private static final Character OPT_OUT_FILE_CHR = new Character('o');
 	private static final String OPT_OUT_FILE_STR = "out";
@@ -411,7 +425,9 @@ public class AfpDump {
 		sb.append("--");
 		sb.append(OPT_CONVERT_SPECIFIC_STR);
 		sb.append(" [tle...]]");
-		sb.append(" \\");
+		sb.append(" \\ # Defaults to '");
+		sb.append(OPT_CONVERT_SPECIFIC_VAL_DEF);
+		sb.append("'. Supply empty string for none.");
 		sb.append(System.getProperty("line.separator"));
 
 		// OPT_GROUP_RECORDS
@@ -453,7 +469,9 @@ public class AfpDump {
 		sb.append("--");
 		sb.append(OPT_MD_THOLD_STR);
 		sb.append("]");
-		sb.append(" \\");
+		sb.append(" \\ # Defaults to '");
+		sb.append(OPT_MD_THOLD_VAL_DEF);
+		sb.append("'. Supply <0 to disable.");
 		sb.append(System.getProperty("line.separator"));
 
 		// OPT_OUT_FILE
@@ -531,8 +549,7 @@ public class AfpDump {
 			if (LOG.isDebugEnabled()) {
 				LOG.debug("Using " + opts.getRemainingArg() + " as input");
 			}
-			in = new BufferedInputStream(new FileInputStream(opts
-					.getRemainingArg()));
+			in = new BufferedInputStream(new FileInputStream(opts.getRemainingArg()));
 		}
 
 		// Open output file for writing
@@ -618,13 +635,8 @@ public class AfpDump {
 
 			} else {
 
-				// Read input until finished
-				while (in.available() > 0) {
-
-					// Read record
-					AfpRecord rec = fact.createAfpRecord();
-
-					// Write record
+				// Read input until finished and write record
+				for (AfpRecord rec = fact.createAfpRecord(); rec != null; rec = fact.createAfpRecord()) {
 					rec.write(out, arwProps, 0);
 				}
 			}
