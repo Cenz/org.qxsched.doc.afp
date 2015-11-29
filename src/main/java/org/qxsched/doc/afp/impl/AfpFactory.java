@@ -2,6 +2,7 @@ package org.qxsched.doc.afp.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PushbackInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import org.qxsched.doc.afp.GenericAfpTriplet;
 
 /*
  * 
- * Copyright 2009, 2010, 2011 Vincenzo Zocca
+ * Copyright 2009, 2010, 2011, 2015 Vincenzo Zocca
  * 
  * This file is part of Java library org.qxsched.doc.afp.
  *
@@ -44,10 +45,11 @@ import org.qxsched.doc.afp.GenericAfpTriplet;
 public class AfpFactory extends org.qxsched.doc.afp.AfpFactory {
 
 	// Logger
+	@SuppressWarnings("unused")
 	private static Logger LOG = Logger.getLogger(AfpFactory.class);
 
 	private AfpClasses classes;
-	private InputStream in;
+	private PushbackInputStream in;
 	private AfpReadWriteProperties props = AfpReadWriteProperties.instance();
 
 	@Override
@@ -55,7 +57,7 @@ public class AfpFactory extends org.qxsched.doc.afp.AfpFactory {
 
 		// Return if no more bytes
 		try {
-			if (getInputStream().available() == 0) {
+			if (in.available() == 0) {
 				return null;
 			}
 		} catch (IOException e) {
@@ -139,7 +141,10 @@ public class AfpFactory extends org.qxsched.doc.afp.AfpFactory {
 
 	@Override
 	public void setInputStream(InputStream in) throws AfpException {
-		this.in = in;
+		if (in instanceof PushbackInputStream) {
+			this.in = (PushbackInputStream) in;
+		} else {
+			this.in = new PushbackInputStream(in);
+		}
 	}
-
 }
