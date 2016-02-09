@@ -14,7 +14,7 @@ import org.qxsched.doc.afp.util.AfpDump;
 
 /*
  * 
- * Copyright 2009, 2010, 2011, 2015 Vincenzo Zocca
+ * Copyright 2009, 2010, 2011, 2015, 2016 Vincenzo Zocca
  * 
  * This file is part of Java library org.qxsched.doc.afp.
  *
@@ -361,6 +361,10 @@ public class GenericAfpRecord implements AfpRecord {
 		out.write(StringUtils.leftPad(AfpStructuredFieldDefinitions.hexString(
 				reserved, 4), 4, '0'));
 
+		// Write CRLF
+		out.write(" CRLF:");
+		out.write(new Boolean(isEndsInCrLf()).toString());
+	
 		// Write data
 		out.newLine();
 		writeData(out, props, prefix);
