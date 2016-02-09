@@ -13,7 +13,7 @@ import org.qxsched.doc.afp.GenericAfpRecord;
 
 /*
  * 
- * Copyright 2009, 2010, 2011 Vincenzo Zocca
+ * Copyright 2009, 2010, 2011, 2016 Vincenzo Zocca
  * 
  * This file is part of Java library org.qxsched.doc.afp.
  *
@@ -88,6 +88,9 @@ public class AfpRecordNOP extends GenericAfpRecord {
 
 		// Set data
 		setData(record.getData());
+		
+		// Set EndsInCrLf
+		setEndsInCrLf(record.isEndsInCrLf());
 	}
 
 	public void writeData(BufferedWriter out, AfpReadWriteProperties props,

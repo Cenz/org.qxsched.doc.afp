@@ -15,7 +15,7 @@ import org.qxsched.doc.afp.GenericAfpTriplet;
 
 /*
  * 
- * Copyright 2009, 2010, 2011 Vincenzo Zocca
+ * Copyright 2009, 2010, 2011, 2016 Vincenzo Zocca
  * 
  * This file is part of Java library org.qxsched.doc.afp.
  *
@@ -97,6 +97,9 @@ public class AfpRecordTLE extends GenericAfpRecord {
 
 		// Set data
 		setData(record.getData(), fact);
+		
+		// Set EndsInCrLf
+		setEndsInCrLf(record.isEndsInCrLf());
 	}
 
 	public AfpRecordTLE(int flags, int reserved, AfpTriplet[] trips)
