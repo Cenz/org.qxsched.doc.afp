@@ -6,7 +6,7 @@ import java.io.OutputStream;
 
 /*
  * 
- * Copyright 2009, 2010, 2011, 2015 Vincenzo Zocca
+ * Copyright 2009, 2010, 2011, 2015, 2016 Vincenzo Zocca
  * 
  * This file is part of Java library org.qxsched.doc.afp.
  *
@@ -100,6 +100,14 @@ public interface AfpRecord {
 	 */
 	public boolean isEndsInCrLf();
 	
+	/**
+	 * Sets the flag to denote that the record is ended with CR LF.
+	 * 
+	 * @param endsInCrLf
+	 *            the flag to denote that the record is ended with CR LF.
+	 */
+	public void setEndsInCrLf(boolean endsInCrLf);
+
 	/**
 	 * Writes the {@link AfpRecord} in a human readable form to the supplied
 	 * buffered writer. Intended for analysis.
